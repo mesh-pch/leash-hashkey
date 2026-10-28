@@ -23,7 +23,7 @@ T_RECEIPT = topic("Receipt(uint256,bytes32)")
 
 def rpc(url, method, params):
     req = urllib.request.Request(url, json.dumps({"jsonrpc": "2.0", "id": 1, "method": method, "params": params}).encode(),
-                                 {"content-type": "application/json"})
+                                 {"content-type": "application/json", "user-agent": "leash-verify/1.0"})
     r = json.load(urllib.request.urlopen(req, timeout=30))
     if "error" in r:
         raise RuntimeError(r["error"])

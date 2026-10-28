@@ -27,7 +27,7 @@ agent is paid by the contract on delivery, not by anyone's goodwill.
 | "What did my agent buy?" | every state change is folded into a hash chain (`logHead`); `python/leash_verify.py` re-derives it from public events — any edit/omission → FAIL. |
 | Emergency | `setPaused(true)` blocks new hires; in-flight jobs still settle. |
 
-## Verify in one minute
+## Verify in one minute (or just run `python python/leash_verify.py https://mainnet.hsk.xyz 0xd3De0f08E2e9696AFB212BF55270f803A2F37a62 29409276` against mainnet)
 ```bash
 git clone --recurse-submodules <this repo> && cd leash-hashkey
 forge test                         # 19 tests incl. 256-run solvency fuzz
@@ -46,6 +46,10 @@ python python/leash_verify.py http://127.0.0.1:8545 <wallet>      # -> OK: 7 rec
 ```bash
 forge script script/Deploy.s.sol --rpc-url https://mainnet.hsk.xyz --private-key $PK --broadcast   # chain 177
 ```
-Status: **not yet deployed to mainnet** (see DEPLOYMENTS.md once done). Contracts are un-audited; use small limits.
+**Live on HashKey Chain mainnet (177), source-verified on Blockscout:**
+- LeashFactory [`0x8383854D98D0339D82F69d7bF9Baa69dbC559bcD`](https://hsk.blockscout.com/address/0x8383854D98D0339D82F69d7bF9Baa69dbC559bcD)
+- Demo LeashWallet [`0xd3De0f08E2e9696AFB212BF55270f803A2F37a62`](https://hsk.blockscout.com/address/0xd3De0f08E2e9696AFB212BF55270f803A2F37a62) — one full hire → deliver → approve cycle executed, receipt chain re-verified from events.
+
+All tx hashes in [DEPLOYMENTS.md](DEPLOYMENTS.md). The demo cycle uses a worthless demo token (lUSD), not a real stablecoin. Contracts are un-audited; use small limits.
 
 MIT licensed.
